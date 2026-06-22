@@ -1,0 +1,44 @@
+# ── Model weights (large files — store on Kaggle/HuggingFace) ──
+*.pt
+*.pth
+*.onnx
+*.engine
+*.torchscript
+
+# ── Dataset & zips (too large for Git) ──
+dataset/
+dataset.zip
+*.zip
+*.tar.gz
+
+# ── YOLO training output ──
+runs/
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# ── Jupyter ──
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE ──
+.vscode/
+.idea/
+*.suo
+
+# ── Output / results ──
+graded_output/
+*.log
