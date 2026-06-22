@@ -105,7 +105,9 @@ The frontend is a single-page app with no framework dependencies — just HTML, 
 6. Lists every detected bounding box in a **detection breakdown** table
 
 <img width="1887" height="883" alt="Screenshot 2026-06-22 192932" src="https://github.com/user-attachments/assets/6ae4eaa4-6376-4a5a-8c5a-f40076de8541" />
+
 <img width="1884" height="895" alt="Screenshot 2026-06-22 192959" src="https://github.com/user-attachments/assets/43681fc1-c00d-4293-8eb4-29f4eb22979e" />
+
 <img width="1874" height="882" alt="Screenshot 2026-06-22 193030" src="https://github.com/user-attachments/assets/5d6ad9a0-22c8-4e34-bd34-c9d9dfbe9d72" />
 
 ---
