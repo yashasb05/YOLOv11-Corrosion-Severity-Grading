@@ -1,4 +1,4 @@
-# 🔩 Rust Detection & Severity Grading
+# Rust Detection & Severity Grading
 
 <p align="center">
   <img src="https://img.shields.io/badge/Model-YOLOv11-ff6b35?style=for-the-badge&logo=pytorch" />
