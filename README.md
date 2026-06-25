@@ -132,6 +132,18 @@ The frontend is a single-page application built with plain HTML, CSS, and vanill
 
 ---
 
+https://github.com/user-attachments/assets/e0a63df5-d2aa-44fc-a7e9-33c89dcb7440
+
+---
+
+<img width="1887" height="883" alt="Screenshot 2026-06-22 192932" src="https://github.com/user-attachments/assets/c30d29ad-b878-4ee0-af6e-2685181d8f80" />
+
+---
+
+<img width="1884" height="895" alt="Screenshot 2026-06-22 192959" src="https://github.com/user-attachments/assets/7480b891-530b-401e-aaf9-e41d8f22147c" />
+
+---
+
 ## REST API Reference
 
 The Flask backend exposes two endpoints.
