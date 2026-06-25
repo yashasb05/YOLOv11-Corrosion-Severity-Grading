@@ -285,6 +285,9 @@ python detect_and_grade.py --source images/ --weights best.pt --conf 0.35 --outp
 
 The model was trained on Kaggle using a custom-labeled corrosion dataset. The full training pipeline is documented in [`kaggle_training.ipynb`](kaggle_training.ipynb).
 
+The dataset used for this model is : https://universe.roboflow.com/averkios/rust-corrosion-detection
+Credits: averkios
+
 | Property | Value |
 |---|---|
 | Architecture | YOLOv11 |
