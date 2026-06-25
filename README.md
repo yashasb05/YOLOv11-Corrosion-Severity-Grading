@@ -1,4 +1,4 @@
-# Rust Detection & Severity Grading
+# 🔩 Rust Detection & Severity Grading
 
 <p align="center">
   <img src="https://img.shields.io/badge/Model-YOLOv11-ff6b35?style=for-the-badge&logo=pytorch" />
@@ -12,23 +12,23 @@ An AI-powered **rust and corrosion detection system** built on **YOLOv11**, feat
 
 ---
 
-## Features
+## ✨ Features
 
 | Feature | Description |
 |---|---|
-| **Real-Time Detection** | Detects corrosion instantly using YOLOv11 at 640px resolution |
-| **4-Class Recognition** | Identifies `corrosion`, `moderate corrosion`, `rust`, `severe corrosion` |
-| **Severity Grading** | Grades results as **MILD**, **MODERATE**, or **CRITICAL** |
-| **Coverage Analysis** | Calculates the % of image area affected by corrosion |
-| **Confidence Scoring** | Reports per-detection and average model confidence |
-| **Side-by-Side Comparison** | Original image vs. annotated output with bounding boxes |
-| **Severity Bar** | Gradient bar from 🟢 Mild → 🔴 Critical with animated marker |
-| **Confidence Ring** | Animated circular gauge showing model confidence |
-| **100% Local / Offline** | No cloud, no data upload — everything runs on your machine |
+| 🔍 **Real-Time Detection** | Detects corrosion instantly using YOLOv11 at 640px resolution |
+| 🏷️ **4-Class Recognition** | Identifies `corrosion`, `moderate corrosion`, `rust`, `severe corrosion` |
+| 📊 **Severity Grading** | Grades results as **MILD**, **MODERATE**, or **CRITICAL** |
+| 📐 **Coverage Analysis** | Calculates the % of image area affected by corrosion |
+| 🎯 **Confidence Scoring** | Reports per-detection and average model confidence |
+| 🖼️ **Side-by-Side Comparison** | Original image vs. annotated output with bounding boxes |
+| 📉 **Severity Bar** | Gradient bar from 🟢 Mild → 🔴 Critical with animated marker |
+| 💯 **Confidence Ring** | Animated circular gauge showing model confidence |
+| 🌐 **100% Local / Offline** | No cloud, no data upload — everything runs on your machine |
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 .
@@ -46,7 +46,7 @@ An AI-powered **rust and corrosion detection system** built on **YOLOv11**, feat
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 ### 1. Clone the repository
 
@@ -65,11 +65,6 @@ pip install flask flask-cors ultralytics opencv-python
 > ```bash
 > pip install flask flask-cors ultralytics opencv-python -i https://pypi.tuna.tsinghua.edu.cn/simple
 > ```
-
-### Train the Model Using Google Colab or Kaggle using Jyupter Notebook
-### Dataset : https://universe.roboflow.com/averkios/rust-corrosion-detection
-
-### If you need Trained Model: Email me at yb62406@gmail.com
 
 ### 3. Start the backend server
 
@@ -92,7 +87,7 @@ The **green dot** in the top-right confirms the backend is connected. Drop any i
 
 ---
 
-## Web Interface
+## 🖥️ Web Interface
 
 The frontend is a single-page app with no framework dependencies — just HTML, CSS, and vanilla JavaScript.
 
@@ -104,15 +99,9 @@ The frontend is a single-page app with no framework dependencies — just HTML, 
 5. Renders the **confidence ring** with average, max, and min per-box confidence
 6. Lists every detected bounding box in a **detection breakdown** table
 
-<img width="1887" height="883" alt="Screenshot 2026-06-22 192932" src="https://github.com/user-attachments/assets/6ae4eaa4-6376-4a5a-8c5a-f40076de8541" />
-
-<img width="1884" height="895" alt="Screenshot 2026-06-22 192959" src="https://github.com/user-attachments/assets/43681fc1-c00d-4293-8eb4-29f4eb22979e" />
-
-<img width="1874" height="882" alt="Screenshot 2026-06-22 193030" src="https://github.com/user-attachments/assets/5d6ad9a0-22c8-4e34-bd34-c9d9dfbe9d72" />
-
 ---
 
-## REST API
+## 🔌 REST API
 
 The Flask backend exposes two endpoints:
 
@@ -161,7 +150,7 @@ Analyze an uploaded image for corrosion.
 
 ---
 
-## Detection Classes & Severity
+## 🧠 Detection Classes & Severity
 
 | Class ID | Class Name | Severity Grade | Label |
 |---|---|---|---|
@@ -203,7 +192,7 @@ python detect_and_grade.py --source images/ --weights best.pt --conf 0.35 --outp
 
 ---
 
-## Dependencies
+## 📦 Dependencies
 
 | Package | Purpose |
 |---|---|
@@ -215,7 +204,7 @@ python detect_and_grade.py --source images/ --weights best.pt --conf 0.35 --outp
 
 ---
 
-## Model Training
+## 🏋️ Model Training
 
 The model was trained on Kaggle using a custom corrosion dataset. See [`kaggle_training.ipynb`](kaggle_training.ipynb) for the full training pipeline.
 
@@ -227,7 +216,7 @@ The model was trained on Kaggle using a custom corrosion dataset. See [`kaggle_t
 
 ---
 
-## Requirements
+## 📋 Requirements
 
 - Python 3.8+
 - A modern browser (Chrome, Edge, Firefox)
@@ -235,6 +224,6 @@ The model was trained on Kaggle using a custom corrosion dataset. See [`kaggle_t
 
 ---
 
-## License
+## 📄 License
 
 This project is for academic and research purposes. See [LICENSE](LICENSE) for details.
