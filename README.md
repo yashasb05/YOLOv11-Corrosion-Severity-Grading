@@ -1,126 +1,166 @@
-# 🔩 Rust Detection & Severity Grading
+# YOLOv11 Corrosion Severity Grading
 
 <p align="center">
   <img src="https://img.shields.io/badge/Model-YOLOv11-ff6b35?style=for-the-badge&logo=pytorch" />
   <img src="https://img.shields.io/badge/Backend-Flask-000000?style=for-the-badge&logo=flask" />
-  <img src="https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python" />
+  <img src="https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python" />
   <img src="https://img.shields.io/badge/Inference-Local%20%2F%20Offline-22c55e?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Frontend-HTML%20%2F%20CSS%20%2F%20JS-f59e0b?style=for-the-badge" />
 </p>
 
-An AI-powered **rust and corrosion detection system** built on **YOLOv11**, featuring a local Flask backend and a premium web frontend. Upload any image of a metal surface and receive instant detection results, severity grading, coverage analysis, and model confidence scores — all running fully offline on your machine.
+An AI-powered corrosion detection and severity grading system built on **YOLOv11**. The system accepts an image of a metal surface and returns detection results, severity grading, coverage percentage, and model confidence scores. Everything runs fully offline — no internet connection or cloud service is required after setup.
 
 ---
 
-## ✨ Features
+## Table of Contents
+
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Requirements](#requirements)
+- [Quick Start](#quick-start)
+- [Web Interface](#web-interface)
+- [REST API Reference](#rest-api-reference)
+- [Detection Classes and Severity Logic](#detection-classes-and-severity-logic)
+- [CLI Usage](#cli-usage)
+- [Model Training](#model-training)
+- [Dependencies](#dependencies)
+- [License](#license)
+
+---
+
+## Features
 
 | Feature | Description |
 |---|---|
-| 🔍 **Real-Time Detection** | Detects corrosion instantly using YOLOv11 at 640px resolution |
-| 🏷️ **4-Class Recognition** | Identifies `corrosion`, `moderate corrosion`, `rust`, `severe corrosion` |
-| 📊 **Severity Grading** | Grades results as **MILD**, **MODERATE**, or **CRITICAL** |
-| 📐 **Coverage Analysis** | Calculates the % of image area affected by corrosion |
-| 🎯 **Confidence Scoring** | Reports per-detection and average model confidence |
-| 🖼️ **Side-by-Side Comparison** | Original image vs. annotated output with bounding boxes |
-| 📉 **Severity Bar** | Gradient bar from 🟢 Mild → 🔴 Critical with animated marker |
-| 💯 **Confidence Ring** | Animated circular gauge showing model confidence |
-| 🌐 **100% Local / Offline** | No cloud, no data upload — everything runs on your machine |
+| Real-Time Detection | Detects corrosion using YOLOv11 at 640 x 640 pixel resolution |
+| 4-Class Recognition | Identifies `corrosion`, `moderate corrosion`, `rust`, and `severe corrosion` |
+| Severity Grading | Grades results as NONE, MILD, MODERATE, or CRITICAL |
+| Coverage Analysis | Calculates the percentage of the image area affected by corrosion |
+| Confidence Scoring | Reports per-detection and average model confidence |
+| Side-by-Side View | Displays the original image alongside the annotated output |
+| Severity Bar | Visual gradient bar with animated marker from Mild to Critical |
+| Confidence Ring | Animated circular gauge showing average model confidence |
+| Fully Offline | No data is uploaded anywhere — all processing happens on your machine |
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 .
-├── best.pt                  # YOLOv11 trained weights
+├── best.pt                  # YOLOv11 trained model weights (~40 MB)
 ├── app.py                   # Flask REST API backend
-├── detect_and_grade.py      # Standalone CLI inference script
-├── frontend/
-│   ├── index.html           # Web UI (open in browser)
-│   ├── style.css            # Dark-theme design system
-│   └── app.js               # Frontend logic & API integration
-├── graded_output/           # Saved annotated images & reports
+├── detect_and_grade.py      # Standalone command-line inference script
+├── index.html               # Web UI (open directly in a browser)
+├── style.css                # Dark-theme stylesheet
+├── app.js                   # Frontend logic and API integration
+├── graded_output/           # Saved annotated images and reports (auto-created)
 ├── dataset/                 # Training dataset
-└── kaggle_training.ipynb    # Model training notebook
+├── pt files & onnx/         # Alternative model formats (ONNX export)
+└── kaggle_training.ipynb    # Model training notebook (Kaggle)
 ```
+
+> **Note:** The `graded_output/` directory is created automatically the first time you run inference.
 
 ---
 
-## 🚀 Quick Start
+## Requirements
+
+- Python 3.8 or higher
+- A modern browser (Chrome, Edge, Firefox, or Safari)
+- `best.pt` model file present in the project root
+
+---
+
+## Quick Start
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/rust-detection.git
-cd rust-detection
+git clone https://github.com/yashasb05/YOLOv11-Corrosion-Severity-Grading.git
+cd YOLOv11-Corrosion-Severity-Grading
 ```
 
-### 2. Install dependencies
+### 2. Install Python dependencies
 
 ```bash
 pip install flask flask-cors ultralytics opencv-python
 ```
 
-> **Network restricted?** Use a mirror:
-> ```bash
-> pip install flask flask-cors ultralytics opencv-python -i https://pypi.tuna.tsinghua.edu.cn/simple
-> ```
+If you are on a network-restricted environment, use a mirror:
 
-### 3. Start the backend server
+```bash
+pip install flask flask-cors ultralytics opencv-python -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+### 3. Start the Flask backend
 
 ```bash
 python app.py
 ```
 
-You should see:
+You should see the following output once the server is ready:
+
 ```
-[INFO] Loading model from best.pt …
+[INFO] Loading model from best.pt ...
 [INFO] Model ready.
  * Running on http://127.0.0.1:5000
 ```
 
-### 4. Open the frontend
+Keep this terminal window open while using the application.
 
-Simply open **`frontend/index.html`** in your browser (double-click the file).
+### 4. Open the web interface
 
-The **green dot** in the top-right confirms the backend is connected. Drop any image and analysis begins immediately.
+Open `index.html` in your browser (double-click the file or drag it into a browser window).
 
----
-
-## 🖥️ Web Interface
-
-The frontend is a single-page app with no framework dependencies — just HTML, CSS, and vanilla JavaScript.
-
-**On image upload it:**
-1. Shows animated loading steps (Preprocessing → Detecting → Grading)
-2. Displays the **original vs. annotated** image side-by-side
-3. Shows the **overall grade badge** (NONE / MILD / MODERATE / CRITICAL)
-4. Animates the **severity bar** — marker moves from green to red based on score
-5. Renders the **confidence ring** with average, max, and min per-box confidence
-6. Lists every detected bounding box in a **detection breakdown** table
+The status indicator in the top-right corner will turn green when the backend is connected. Upload or drop any image to begin analysis.
 
 ---
 
-## 🔌 REST API
+## Web Interface
 
-The Flask backend exposes two endpoints:
+The frontend is a single-page application built with plain HTML, CSS, and vanilla JavaScript. It has no external framework dependencies and works by opening the file directly in a browser.
 
-### `GET /api/health`
-Check if the server is running.
+**What happens when you upload an image:**
+
+1. An animated loading sequence runs through the stages: Preprocessing, Detecting, and Grading.
+2. The original image and the annotated output are displayed side by side.
+3. An overall grade badge is shown: NONE, MILD, MODERATE, or CRITICAL.
+4. The severity bar animates its marker based on the computed severity score.
+5. The confidence ring displays the average, maximum, and minimum per-bounding-box confidence.
+6. A detection breakdown table lists every detected region with its class, grade, and confidence.
+
+---
+
+## REST API Reference
+
+The Flask backend exposes two endpoints.
+
+### GET /api/health
+
+Checks whether the server is running and the model is loaded.
 
 **Response:**
+
 ```json
-{ "status": "ok", "model": "path/to/best.pt" }
+{
+  "status": "ok",
+  "model": "path/to/best.pt"
+}
 ```
 
 ---
 
-### `POST /api/analyze`
-Analyze an uploaded image for corrosion.
+### POST /api/analyze
 
-**Request:** `multipart/form-data` with field `image` (JPEG, PNG, BMP, WebP)
+Analyzes an uploaded image for corrosion and returns structured results.
+
+**Request:**
+
+`multipart/form-data` with a field named `image`. Accepted formats: JPEG, PNG, BMP, WebP.
 
 **Response:**
+
 ```json
 {
   "original_image":  "<base64-encoded JPEG>",
@@ -148,9 +188,23 @@ Analyze an uploaded image for corrosion.
 }
 ```
 
+**Response fields explained:**
+
+| Field | Description |
+|---|---|
+| `original_image` | Base64-encoded JPEG of the input image |
+| `annotated_image` | Base64-encoded JPEG with bounding boxes and labels drawn |
+| `avg_confidence` | Average detection confidence across all detections (0–100) |
+| `overall.grade` | Integer grade: 0 = NONE, 1 = MILD, 2 = MODERATE, 3 = CRITICAL |
+| `overall.coverage_pct` | Percentage of the image area covered by detected corrosion |
+| `overall.severity_pct` | Normalized severity score for the UI gauge (0–100) |
+| `detections` | Array of individual detection objects |
+
 ---
 
-## 🧠 Detection Classes & Severity
+## Detection Classes and Severity Logic
+
+### Class Definitions
 
 | Class ID | Class Name | Severity Grade | Label |
 |---|---|---|---|
@@ -161,69 +215,88 @@ Analyze an uploaded image for corrosion.
 
 ### Overall Grade Logic
 
+The overall grade is determined after evaluating all detections together:
+
 | Condition | Grade | Label |
 |---|---|---|
-| Max severity = 3 OR coverage > 50% | 3 | **CRITICAL** |
-| Max severity = 2 OR coverage > 25% OR detections > 5 | 2 | **MODERATE** |
-| Otherwise | 1 | **MILD** |
-| No detections | 0 | **NONE** |
+| Max severity = 3, OR coverage > 50% | 3 | CRITICAL |
+| Max severity = 2, OR coverage > 25%, OR more than 5 detections | 2 | MODERATE |
+| Any detections below the above thresholds | 1 | MILD |
+| No detections found | 0 | NONE |
+
+The default confidence threshold for detections is **0.25** (25%). Detections below this score are discarded.
 
 ---
 
-## 🖱️ CLI Usage
+## CLI Usage
 
-You can also run inference directly from the command line without the web interface:
+You can run inference directly from the command line without starting the web interface.
+
+**Single image:**
 
 ```bash
-# Single image
 python detect_and_grade.py --source path/to/image.jpg --weights best.pt
+```
 
-# Entire folder
+**Entire folder of images:**
+
+```bash
 python detect_and_grade.py --source path/to/images/ --weights best.pt
+```
 
-# Custom confidence threshold & output directory
+**Custom confidence threshold and output directory:**
+
+```bash
 python detect_and_grade.py --source images/ --weights best.pt --conf 0.35 --output results/
 ```
 
-**Outputs saved to `graded_output/`:**
-- `graded_<filename>.jpg` — annotated images with bounding boxes
-- `severity_report.csv` — grade summary per image
-- `severity_report.json` — full detection data in JSON
+**Available arguments:**
+
+| Argument | Default | Description |
+|---|---|---|
+| `--source` | (required) | Path to a single image file or a directory of images |
+| `--weights` | (required) | Path to the YOLOv11 model weights file (`best.pt`) |
+| `--conf` | `0.25` | Minimum confidence threshold for detections |
+| `--output` | `graded_output` | Directory where annotated images and reports are saved |
+
+**Output files saved to the output directory:**
+
+| File | Description |
+|---|---|
+| `graded_<filename>.jpg` | Annotated image with bounding boxes and grade banner |
+| `severity_report.csv` | Summary table — one row per image |
+| `severity_report.json` | Full detection data including bounding boxes and per-image grades |
 
 ---
 
-## 📦 Dependencies
+## Model Training
+
+The model was trained on Kaggle using a custom-labeled corrosion dataset. The full training pipeline is documented in [`kaggle_training.ipynb`](kaggle_training.ipynb).
+
+| Property | Value |
+|---|---|
+| Architecture | YOLOv11 |
+| Input resolution | 640 x 640 pixels |
+| Number of classes | 4 |
+| Weight file | `best.pt` (~40 MB) |
+| ONNX export | `pt files & onnx/best.onnx` (~80 MB) |
+
+The ONNX export can be used for deployment in environments that do not support PyTorch, such as embedded systems or browser-based inference with ONNX Runtime Web.
+
+---
+
+## Dependencies
 
 | Package | Purpose |
 |---|---|
-| `ultralytics` | YOLOv11 inference engine |
-| `opencv-python` | Image reading, annotation, encoding |
-| `flask` | REST API backend |
-| `flask-cors` | Cross-origin requests from the browser frontend |
-| `numpy` | Array operations |
+| `ultralytics` | YOLOv11 model loading and inference |
+| `opencv-python` | Image reading, bounding box drawing, and JPEG encoding |
+| `flask` | REST API backend server |
+| `flask-cors` | Allows the browser frontend to call the local API (CORS headers) |
+| `numpy` | Numerical array operations |
 
 ---
 
-## 🏋️ Model Training
+## License
 
-The model was trained on Kaggle using a custom corrosion dataset. See [`kaggle_training.ipynb`](kaggle_training.ipynb) for the full training pipeline.
-
-- **Architecture:** YOLOv11
-- **Input size:** 640 × 640
-- **Classes:** 4 (corrosion, moderate corrosion, rust, severe corrosion)
-- **Weights:** `best.pt` (40 MB)
-- **ONNX export:** `pt files & onnx/best.onnx` (80 MB)
-
----
-
-## 📋 Requirements
-
-- Python 3.8+
-- A modern browser (Chrome, Edge, Firefox)
-- `best.pt` model file in the project root
-
----
-
-## 📄 License
-
-This project is for academic and research purposes. See [LICENSE](LICENSE) for details.
+This project is intended for academic and research purposes. See [LICENSE](LICENSE) for details.
